@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="header-gov">
+    <h2>Lista de Pessoas Cadastradas</h2>
+  </div>
+
+  <button class="btn-primary" (click)="novaPessoa()">Cadastrar Nova Pessoa</button>
+
+  <table *ngIf="pessoas.length > 0; else noPessoas">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Email</th>
+        <th>Sexo</th>
+        <th>Telefone</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pessoa of pessoas">
+        <td>{{ pessoa.id }}</td>
+        <td>{{ pessoa.nome }}</td>
+        <td>{{ pessoa.cpf }}</td>
+        <td>{{ pessoa.email }}</td>
+        <td>{{ pessoa.sexo }}</td>
+        <td>{{ pessoa.telefone }}</td>
+        <td>
+          <button class="btn-warning" (click)="editarPessoa(pessoa.id)">Editar</button>
+          <button class="btn-danger" (click)="deletarPessoa(pessoa.id)">Deletar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noPessoas>
+    <p>Nenhuma pessoa cadastrada ainda. <a (click)="novaPessoa()" style="cursor: pointer; color: #007bff;">Cadastre uma agora!</a></p>
+  </ng-template>
+</div>

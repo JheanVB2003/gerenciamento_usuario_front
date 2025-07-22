@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="header-gov">
+    <h2>{{ isEditing ? 'Editar Pessoa' : 'Cadastrar Nova Pessoa' }}</h2>
+  </div>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" [(ngModel)]="pessoa.nome" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="cpf">CPF:</label>
+      <input type="text" id="cpf" name="cpf" [(ngModel)]="pessoa.cpf" class="form-control" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="000.000.000-00">
+      <small class="form-text text-muted">Formato: 000.000.000-00</small>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" [(ngModel)]="pessoa.email" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="sexo">Sexo:</label>
+      <select id="sexo" name="sexo" [(ngModel)]="pessoa.sexo" class="form-control" required>
+        <option value="">Selecione</option>
+        <option value="MASCULINO">Masculino</option>
+        <option value="FEMININO">Feminino</option>
+        <option value="OUTRO">Outro</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="telefone">Telefone:</label>
+      <input type="text" id="telefone" name="telefone" [(ngModel)]="pessoa.telefone" class="form-control" required pattern="\(\d{2}\)\s\d{4,5}-\d{4}" placeholder="(00) 00000-0000">
+      <small class="form-text text-muted">Formato: (00) 00000-0000 ou (00) 0000-0000</small>
+    </div>
+
+    <button type="submit" class="btn-primary">
+      {{ isEditing ? 'Atualizar' : 'Cadastrar' }}
+    </button>
+    <button type="button" class="btn-secondary" (click)="voltarParaLista()">Voltar</button>
+  </form>
+</div>
