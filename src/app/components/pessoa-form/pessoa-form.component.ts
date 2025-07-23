@@ -1,4 +1,3 @@
-// src/app/components/pessoa-form/pessoa-form.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -27,25 +26,21 @@ export class PessoaFormComponent implements OnInit {
   constructor(
     private pessoaService: PessoaService,
     private router: Router,
-    private route: ActivatedRoute // Para obter parâmetros da rota (ID para edição)
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    // Verifica se estamos em modo de edição
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('id');
       if (idParam) {
         this.isEditing = true;
-        this.pessoaId = +idParam; // Converte string para número
+        this.pessoaId = +idParam;
         this.carregarPessoaParaEdicao(this.pessoaId);
       }
     });
   }
 
-  /**
-   * Carrega os dados da pessoa para preencher o formulário em modo de edição.
-   * @param id O ID da pessoa a ser carregada.
-   */
+
   carregarPessoaParaEdicao(id: number): void {
     this.pessoaService.getPessoaPorId(id).subscribe({
       next: (data) => {
@@ -58,15 +53,13 @@ export class PessoaFormComponent implements OnInit {
     });
   }
 
-  /**
-   * Envia o formulário de cadastro ou atualização.
-   */
+
   onSubmit(): void {
     if (this.isEditing && this.pessoaId) {
       this.pessoaService.atualizarPessoa(this.pessoaId, this.pessoa).subscribe({
         next: () => {
           alert('Pessoa atualizada com sucesso!');
-          this.router.navigate(['/pessoas']); // Redireciona para a lista
+          this.router.navigate(['/pessoas']);
         },
         error: (err) => {
           console.error('Erro ao atualizar pessoa:', err);
@@ -77,7 +70,7 @@ export class PessoaFormComponent implements OnInit {
       this.pessoaService.cadastrarPessoa(this.pessoa).subscribe({
         next: () => {
           alert('Pessoa cadastrada com sucesso!');
-          this.router.navigate(['/pessoas']); // Redireciona para a lista
+          this.router.navigate(['/pessoas']);
           console.log(this.pessoa.id);
           console.log(this.pessoa.nome);
           console.log(this.pessoa.cpf  );
@@ -90,9 +83,7 @@ export class PessoaFormComponent implements OnInit {
     }
   }
 
-  /**
-   * Volta para a tela de listagem.
-   */
+
   voltarParaLista(): void {
     this.router.navigate(['/pessoas']);
   }

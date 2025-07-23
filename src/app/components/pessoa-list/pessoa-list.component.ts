@@ -1,4 +1,3 @@
-// src/app/components/pessoa-list/pessoa-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PessoaService } from '../../services/pessoa.service';
@@ -24,9 +23,7 @@ export class PessoaListComponent implements OnInit {
     this.carregarPessoas();
   }
 
-  /**
-   * Carrega a lista de todas as pessoas.
-   */
+
   carregarPessoas(): void {
     this.pessoaService.getTodasPessoas().subscribe({
       next: (data) => {
@@ -39,10 +36,7 @@ export class PessoaListComponent implements OnInit {
     });
     }
 
-  /**
-   * Navega para a tela de edição de uma pessoa.
-   * @param id O ID da pessoa a ser editada.
-   */
+
   editarPessoa(id: number | undefined): void {
     if (id) {
       this.router.navigate(['/editar-pessoa', id]);
@@ -51,16 +45,13 @@ export class PessoaListComponent implements OnInit {
     }
   }
 
-  /**
-   * Deleta uma pessoa após confirmação.
-   * @param id O ID da pessoa a ser deletada.
-   */
+
   deletarPessoa(id: number | undefined): void {
     if (id && confirm('Tem certeza que deseja deletar esta pessoa?')) {
       this.pessoaService.deletarPessoa(id).subscribe({
         next: () => {
           alert('Pessoa deletada com sucesso!');
-          this.carregarPessoas(); // Recarrega a lista após a exclusão
+          this.carregarPessoas();
         },
         error: (err) => {
           console.error('Erro ao deletar pessoa:', err);
@@ -70,9 +61,6 @@ export class PessoaListComponent implements OnInit {
     }
   }
 
-  /**
-   * Navega para a tela de cadastro de uma nova pessoa.
-   */
   novaPessoa(): void {
     this.router.navigate(['/cadastrar-pessoa']);
   }
