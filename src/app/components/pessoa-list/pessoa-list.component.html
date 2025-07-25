@@ -19,10 +19,10 @@
     <tbody>
       <tr *ngFor="let pessoa of pessoas">
         <td>{{ pessoa.nome }}</td>
-        <td>{{ pessoa.cpf }}</td>
+        <td>{{ formatarCpf(pessoa.cpf)}}</td>
         <td>{{ pessoa.email }}</td>
         <td>{{ pessoa.sexo }}</td>
-        <td>{{ pessoa.telefone }}</td>
+        <td>{{ formatarTelefone(pessoa.telefone) }}</td>
         <td>
           <button class="btn-warning" (click)="editarPessoa(pessoa.id)">Editar</button>
           <button class="btn-danger" (click)="deletarPessoa(pessoa.id)">Deletar</button>

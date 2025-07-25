@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { PessoaService } from '../../services/pessoa.service';
 import { Pessoa } from '../../models/pessoas.model';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
   selector: 'app-pessoa-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, NgxMaskDirective],
   templateUrl: './pessoa-form.component.html',
   styleUrls: ['./pessoa-form.component.scss']
 })
@@ -71,9 +72,6 @@ export class PessoaFormComponent implements OnInit {
         next: () => {
           alert('Pessoa cadastrada com sucesso!');
           this.router.navigate(['/pessoas']);
-          console.log(this.pessoa.id);
-          console.log(this.pessoa.nome);
-          console.log(this.pessoa.cpf  );
         },
         error: (err) => {
           console.error('Erro ao cadastrar pessoa:', err);
