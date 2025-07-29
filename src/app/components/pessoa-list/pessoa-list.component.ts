@@ -4,16 +4,19 @@ import { PessoaService } from '../../services/pessoa.service';
 import { Pessoa } from '../../models/pessoas.model';
 import { Router, RouterModule } from '@angular/router';
 import { NgxMaskPipe } from 'ngx-mask';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-pessoa-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, NgxMaskPipe],
+  imports: [CommonModule, RouterModule, NgxMaskPipe, FormsModule, MatIconModule],
   templateUrl: './pessoa-list.component.html',
   styleUrls: ['./pessoa-list.component.scss']
 })
 export class PessoaListComponent implements OnInit {
   pessoas: Pessoa[] = [];
+  filtroNome = '';
 
   constructor(
     private pessoaService: PessoaService,
@@ -73,7 +76,24 @@ export class PessoaListComponent implements OnInit {
   }
 
   formatarTelefone(telefone: string): string {
-    return telefone.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+    telefone = telefone.replace(/\D/g, '');
+    if (telefone.length === 11) {
+      return telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    } else if (telefone.length === 10) {
+      return telefone.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+    }
+    return telefone;
   }
 
+  formatarName(name: string): string {
+    return name.toLowerCase();
+  }
+
+  pessoasFiltradas(): Pessoa[] {
+    return this.pessoas
+      .filter(pessoa =>
+        pessoa.nome.toLowerCase().includes(this.filtroNome.toLowerCase())
+      )
+      .sort((a, b) => a.nome.localeCompare(b.nome));
+  }
 }

@@ -3,8 +3,19 @@
     <h2>Lista de Pessoas Cadastradas</h2>
   </div>
 
-  <button class="btn-primary" (click)="novaPessoa()">Cadastrar Nova Pessoa</button>
-
+  <div *ngIf="pessoas.length > 0">
+    <div class="search-container">
+      <input
+        type="text"
+        [(ngModel)]="filtroNome"
+        class="search-input"
+        aria-label="Buscar por nome"
+        placeholder="Buscar por nome..."
+      />
+    </div>
+  </div>
+  
+  
   <table *ngIf="pessoas.length > 0; else noPessoas">
     <thead>
       <tr>
@@ -16,14 +27,15 @@
         <th>Ações</th>
       </tr>
     </thead>
+    
     <tbody>
-      <tr *ngFor="let pessoa of pessoas">
-        <td>{{ pessoa.nome }}</td>
-        <td>{{ formatarCpf(pessoa.cpf)}}</td>
+      <tr *ngFor="let pessoa of pessoasFiltradas()">
+        <td class="name">{{ formatarName(pessoa.nome) }}</td>
+        <td>{{ formatarCpf(pessoa.cpf) }}</td>
         <td>{{ pessoa.email }}</td>
         <td>{{ pessoa.sexo }}</td>
         <td>{{ formatarTelefone(pessoa.telefone) }}</td>
-        <td>
+        <td class="actions">
           <button class="btn-warning" (click)="editarPessoa(pessoa.id)">Editar</button>
           <button class="btn-danger" (click)="deletarPessoa(pessoa.id)">Deletar</button>
         </td>
@@ -34,4 +46,7 @@
   <ng-template #noPessoas>
     <p>Nenhuma pessoa cadastrada ainda. <a (click)="novaPessoa()" style="cursor: pointer; color: #007bff;">Cadastre uma agora!</a></p>
   </ng-template>
+
+  <button class="btn-primary" (click)="novaPessoa()">Cadastrar Nova Pessoa</button>
+
 </div>

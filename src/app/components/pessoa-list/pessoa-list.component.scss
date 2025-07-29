@@ -1,0 +1,80 @@
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  // Ajusta último botão para ficar mais compacto se quiser
+  > :last-child {
+    margin-right: 0;
+  }
+
+  button {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &.btn-warning {
+      background-color: #ffc107;
+      color: #212529;
+
+      &:hover {
+        background-color: #e0a800;
+      }
+    }
+
+    &.btn-danger {
+      background-color: #dc3545;
+      color: #fff;
+
+      &:hover {
+        background-color: #c82333;
+      }
+    }
+  }
+}
+
+.name {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.search-container {
+  position: relative;
+  margin: 0 auto 24px auto;
+  width: 100%;
+  max-width: 420px;
+
+  .search-input {
+    width: 100%;
+    padding: 10px 40px 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+      outline: none;
+    }
+  }
+
+  
+  
+}
+
+.btn-primary {
+  margin-top: 24px;
+}
+
+.btn-primary:hover{
+  background-color: #0056b3;
+}
+
+.header-gov {
+  padding-bottom: 1px;
+}
+
