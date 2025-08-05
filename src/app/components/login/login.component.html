@@ -1,0 +1,46 @@
+<div class="login-container">
+  <div class="card">
+    <div class="card-body">
+      <h1>{{ isLoginMode ? 'Login' : 'Cadastro' }}</h1>
+      <form (ngSubmit)="isLoginMode ? login() : register()">
+        <div *ngIf="!isLoginMode" class="mb-3">
+          <label for="name" class="form-label">Nome</label>
+          <input type="text" 
+                 class="form-control" 
+                 id="name" 
+                 [(ngModel)]="name"
+                 name="name" 
+                 required
+                 *ngIf="!isLoginMode">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" 
+                 class="form-control" 
+                 id="email" 
+                 [(ngModel)]="email"
+                 name="email" 
+                 required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Senha</label>
+          <input type="password" 
+                 class="form-control" 
+                 id="password" 
+                 [(ngModel)]="password"
+                 name="password" 
+                 required>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary w-100 mb-3">
+            {{ isLoginMode ? 'Entrar' : 'Cadastrar' }}
+            </button>
+            <button class="btn btn-primary w-100 mb-3" (click)="toggleMode()" style="background-color: gray;">
+            {{ isLoginMode ? 'Cadastrar' : 'Login' }}
+            </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
